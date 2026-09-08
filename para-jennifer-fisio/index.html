@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Para Jennifer 💜 · Día Mundial de la Fisioterapia</title>
+<title>Para Jeniffer 💜 · Día Mundial de la Fisioterapia</title>
 <meta name="theme-color" content="#170a2b">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -348,7 +348,7 @@
 <!-- ═══════════ 0 · PORTADA ═══════════ -->
 <section class="pantalla activa" data-i="0">
   <p class="capitulo">para mi fisioterapeuta favorita</p>
-  <h1>Para Jennifer</h1>
+  <h1>Para Jeniffer</h1>
   <p class="texto" style="margin-top:14px">
     <span class="destacado">Feliz Día Mundial de la Fisioterapia 💜</span>
     Ponte cómoda, sube el volumen…<br>y déjame decirte lo orgulloso que estoy de ti.
@@ -366,7 +366,7 @@
     <p>Orgulloso de la mujer que eres, de la profesional en la que te estás convirtiendo y de todo el esfuerzo que haces para conseguir cada una de tus metas.</p>
   </div>
   <div class="fotos">
-    <figure class="polaroid grande" style="--giro:-3deg"><img src="img/foto01.jpg" alt="Jennifer"></figure>
+    <figure class="polaroid grande" style="--giro:-3deg"><img src="img/foto01.jpg" alt="Jeniffer"></figure>
   </div>
 </section>
 
@@ -392,7 +392,7 @@
     <p>Me encanta imaginarte creciendo profesionalmente, aprendiendo cada día más, descubriendo nuevas técnicas y convirtiéndote poco a poco en la gran profesional que sé que puedes llegar a ser.</p>
   </div>
   <div class="fotos">
-    <figure class="polaroid" style="--giro:2.5deg"><img src="img/foto02.jpg" alt="Jennifer"></figure>
+    <figure class="polaroid" style="--giro:2.5deg"><img src="img/foto02.jpg" alt="Jeniffer"></figure>
   </div>
 </section>
 
@@ -423,7 +423,7 @@
     <p>Y cuando llegue ese momento, espero poder estar a tu lado sonriendo y diciéndote: “Yo siempre supe que podías hacerlo.”</p>
   </div>
   <div class="fotos">
-    <figure class="polaroid" style="--giro:-3.5deg"><img src="img/foto03.jpg" alt="Jennifer riendo"></figure>
+    <figure class="polaroid" style="--giro:-3.5deg"><img src="img/foto03.jpg" alt="Jeniffer riendo"></figure>
   </div>
 </section>
 
@@ -450,7 +450,7 @@
   <h2>Hoy es tu día</h2>
   <div class="texto">
     <p>El día de una profesión que se dedica a ayudar a las personas a recuperar movimiento, independencia y calidad de vida. Pero para mí también es un día para celebrar a la mujer que amo y admiro.</p>
-    <p>A esa Jennifer que estudia, trabaja, se esfuerza, se preocupa, aprende, se equivoca, vuelve a intentarlo y sigue avanzando. A esa Jennifer que quizá todavía no se da cuenta de todo lo que puede llegar a conseguir.</p>
+    <p>A esa Jeniffer que estudia, trabaja, se esfuerza, se preocupa, aprende, se equivoca, vuelve a intentarlo y sigue avanzando. A esa Jeniffer que quizá todavía no se da cuenta de todo lo que puede llegar a conseguir.</p>
     <span class="destacado">Yo sí lo veo.</span>
   </div>
 </section>
@@ -586,43 +586,36 @@
   }
 
   /* ══════════════════════════════════════════════════
-     MÚSICA DE FONDO
-     1º intenta con el archivo local  audio/musica.mp3
-     2º si no existe, usa el video de YouTube de abajo
+     MÚSICA DE FONDO · YouTube
+     "The Emptiness Machine" · Linkin Park ℗ 2024 Warner Records
+     Si un video no permite incrustarse, se prueba el siguiente solo.
+       1) audio oficial (canal de Warner Records)
+       2) videoclip oficial de la banda
+       3) versión en vivo oficial
      ══════════════════════════════════════════════════ */
-  const VIDEOS = ['GShxN7ONPmI'];   // canción elegida para el fondo
+  const VIDEOS = ['DXQ4sU6KK-I', 'SRXH9AbT280', '7F5MKaJMxDc'];
   let idxVideo = 0;
   let player = null, listo = false, quierenMusica = false;
-  let modo = 'local';               // 'local' | 'yt'
 
-  const audioLocal = new Audio('audio/musica.mp3');
-  audioLocal.loop = true;
-  audioLocal.volume = 0.55;
-  audioLocal.preload = 'auto';
-  audioLocal.addEventListener('canplaythrough', ()=>{ listo = true; if(quierenMusica) intentarReproducir(); }, {once:true});
-  audioLocal.addEventListener('playing', ()=>btnMusica.classList.add('sonando'));
-  audioLocal.addEventListener('pause',   ()=>btnMusica.classList.remove('sonando'));
-  audioLocal.addEventListener('error', ()=>{ if(modo==='local'){ modo='yt'; cargarYouTube(); } }, {once:true});
-
-  function cargarYouTube(){
-    listo = false;
-    const tag = document.createElement('script');
-    tag.src = 'https://www.youtube.com/iframe_api';
-    document.head.appendChild(tag);
-  }
+  const tag = document.createElement('script');
+  tag.src = 'https://www.youtube.com/iframe_api';
+  document.head.appendChild(tag);
 
   function crearPlayer(){
     player = new YT.Player('ytPlayer', {
       videoId: VIDEOS[idxVideo],
       playerVars: {
-        autoplay: 0, controls: 0, loop: 1,
+        autoplay: 0,
+        controls: 0,
+        loop: 1,
         playlist: VIDEOS[idxVideo],   // necesario para que el loop funcione
-        playsinline: 1, rel: 0
+        playsinline: 1,
+        rel: 0
       },
       events: {
         onReady: () => {
           listo = true;
-          player.setVolume(55);
+          player.setVolume(60);
           if(quierenMusica) intentarReproducir();
         },
         onStateChange: (e) => {
@@ -630,12 +623,14 @@
           if(e.data === YT.PlayerState.PAUSED)  btnMusica.classList.remove('sonando');
         },
         onError: () => {
+          // Este video no se puede incrustar → probar el siguiente de la lista
           idxVideo++;
           if(idxVideo < VIDEOS.length){
             player.loadVideoById(VIDEOS[idxVideo]);
+            if(!quierenMusica){ try{ player.pauseVideo(); }catch(err){} }
           } else {
             btnMusica.textContent = '✕';
-            btnMusica.title = 'La música no está disponible en esta red';
+            btnMusica.title = 'YouTube no disponible en esta red';
           }
         }
       }
@@ -644,37 +639,39 @@
   window.onYouTubeIframeAPIReady = crearPlayer;
 
   function intentarReproducir(){
+    // En la pantalla del video la música de fondo se queda callada
     if(pantallas[actual] && pantallas[actual].dataset.video === 'si') return;
-    if(modo === 'local'){
-      const pr = audioLocal.play();
-      if(pr && pr.catch) pr.catch(()=>{});
-      return;
-    }
     if(!listo || !player) return;
-    try{ player.unMute(); player.playVideo(); }catch(err){}
+    try{
+      player.unMute();
+      player.playVideo();
+    }catch(err){}
   }
   function pausarMusica(){
-    if(modo === 'local'){ audioLocal.pause(); }
-    else if(listo && player){ try{ player.pauseVideo(); }catch(err){} }
+    if(listo && player){ try{ player.pauseVideo(); }catch(err){} }
     btnMusica.classList.remove('sonando');
   }
   function reproducirMusica(){
     quierenMusica = true;
     intentarReproducir();
   }
-  function sonando(){
-    if(modo === 'local') return !audioLocal.paused;
-    return listo && player && player.getPlayerState() === YT.PlayerState.PLAYING;
-  }
-  // Reintento en cada clic (los navegadores solo dejan sonar tras un gesto)
+  // En CADA clic del usuario reintenta (los navegadores solo permiten
+  // sonido tras un gesto del usuario; así nunca se queda mudo)
   document.addEventListener('click', ()=>{
-    if(quierenMusica && !sonando()) intentarReproducir();
+    if(quierenMusica && listo && player &&
+       player.getPlayerState() !== YT.PlayerState.PLAYING &&
+       player.getPlayerState() !== YT.PlayerState.PAUSED){
+      intentarReproducir();
+    }
   });
   btnMusica.addEventListener('click', (e)=>{
     e.stopPropagation();
     quierenMusica = true;
-    if(sonando()) pausarMusica(); else intentarReproducir();
+    if(!listo || !player) return;
+    if(player.getPlayerState() === YT.PlayerState.PLAYING){ player.pauseVideo(); }
+    else { intentarReproducir(); }
   });
+
 
   // Aviso si se abre con doble clic (file://)
   if(location.protocol === 'file:'){
